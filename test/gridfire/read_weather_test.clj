@@ -36,7 +36,7 @@
 ;; Tests
 ;;-----------------------------------------------------------------------------
 
-(deftest fetch-temperature-test
+(deftest ^:integration fetch-temperature-test
   (let [geotiff-file    "tmpf_to_sample.tif"
         geotiff-config  (merge test-config-base
                                {:temperature {:type   :geotiff
@@ -62,7 +62,7 @@
           numbands (:numbands (first results))]
       (is (= numbands (m/dimension-count geotiff-results 0))))))
 
-(deftest fetch-relative-humidity-test
+(deftest ^:integration fetch-relative-humidity-test
   (let [geotiff-file    "rh_to_sample.tif"
         geotiff-config  (merge test-config-base
                                {:relative-humidity {:type   :geotiff
@@ -88,7 +88,7 @@
           numbands (:numbands (first results))]
       (is (= numbands (m/dimension-count postgis-results 0))))))
 
-(deftest fetch-wind-speed-20ft-test
+(deftest ^:integration fetch-wind-speed-20ft-test
   (let [geotiff-file    "ws_to_sample.tif"
         geotiff-config  (merge test-config-base
                                {:wind-speed-20ft {:type   :geotiff
@@ -114,7 +114,7 @@
           numbands (:numbands (first results))]
       (is (= numbands (m/dimension-count postgis-results 0))))))
 
-(deftest fetch-wind-from-direction-test
+(deftest ^:integration fetch-wind-from-direction-test
   (let [geotiff-file    "wd_to_sample.tif"
         geotiff-config  (merge test-config-base
                                {:wind-from-direction {:type   :geotiff
@@ -141,7 +141,7 @@
       (is (= numbands (m/dimension-count postgis-results 0))))))
 
 
-(deftest get-weather-from-geotiff-test
+(deftest ^:integration get-weather-from-geotiff-test
   (let [file           "ws_to_sample.tif"
         config         (merge test-config-base
                               {:wind-from-direction {:type   :geotiff
@@ -153,7 +153,7 @@
 
     (is (every? v/vectorz? results))))
 
-(deftest get-weather-from-postgis-test
+(deftest ^:integration get-weather-from-postgis-test
   (let [table          "weather.tmpf WHERE rid=1"
         config         (merge test-config-base
                               {:temperature {:type   :postgis
@@ -165,7 +165,7 @@
 
     (is (every? v/vectorz? results))))
 
-(deftest get-weather-from-range-test
+(deftest ^:unit get-weather-from-range-test
   (let [config         (merge test-config-base
                               {:temperature [0 100]
                                :simulations 10})
@@ -177,7 +177,7 @@
     (is (every? int? results))))
 
 
-(deftest get-weather-from-list-test
+(deftest ^:unit get-weather-from-list-test
   (let [tmp-list       '(0 10 20 30)
         config         (merge test-config-base
                               {:temperature tmp-list
@@ -191,7 +191,7 @@
 
     (is (= (set results) (set tmp-list)))))
 
-(deftest get-weather-scalar-from-test
+(deftest ^:unit get-weather-scalar-from-test
   (let [config         (merge test-config-base
                               {:temperature 42
                                :simulations 10})

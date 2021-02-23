@@ -4,7 +4,7 @@
             [gridfire.behaveplus-results :refer :all]))
 
 ;; Checks live fuel moisture of extinction and dynamic fuel loading for the S&B40 fuel models under fully cured conditions
-(deftest moisturize-test-dry
+(deftest ^:unit moisturize-test-dry
   (doseq [num sb40-fuel-models]
     (let [gridfire-fuel-model-dry   (build-fuel-model num)
           gridfire-fuel-model-wet   (moisturize gridfire-fuel-model-dry (test-fuel-moisture :dry))
@@ -21,7 +21,7 @@
       (is (within gridfire-fraction-cured behaveplus-fraction-cured 0.1)))))
 
 ;; Checks live fuel moisture of extinction and dynamic fuel loading for the S&B40 fuel models under 50% cured conditions
-(deftest moisturize-test-mid
+(deftest ^:unit moisturize-test-mid
   (doseq [num sb40-fuel-models]
     (let [gridfire-fuel-model-dry   (build-fuel-model num)
           gridfire-fuel-model-wet   (moisturize gridfire-fuel-model-dry (test-fuel-moisture :mid))

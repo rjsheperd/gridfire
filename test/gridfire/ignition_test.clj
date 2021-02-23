@@ -86,7 +86,7 @@
 ;; Tests
 ;;-----------------------------------------------------------------------------
 
-(deftest fetch-ignition-layer-test
+(deftest ^:integration fetch-ignition-layer-test
   (testing "Fetching ignition layer from postgis and geotiff file"
     (let [geotiff-config         (merge test-config-base
                                         {:ignition-layer {:type   :geotiff
@@ -100,7 +100,7 @@
       (is (= (:matrix geotiff-ignition-layer)
              (:matrix postgis-ignition-layer))))))
 
-(deftest geotiff-ignition-test
+(deftest ^:unit geotiff-ignition-test
   (testing "Running simulation with ignition layer read from geotiff file"
     (let [geotiff-config (merge test-config-base
                                 {:ignition-layer {:type   :geotiff
@@ -109,7 +109,7 @@
 
       (is (every? some? results)))))
 
-(deftest postgis-ignition-test
+(deftest ^:integration postgis-ignition-test
   (testing "Running simulation with ignition layer read from postgis file"
     (let [postgis-config (merge test-config-base
                                 {:db-spec        db-spec

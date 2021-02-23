@@ -44,7 +44,7 @@
 ;; Tests
 ;;-----------------------------------------------------------------------------
 
-(deftest fetch-landfire-layers-old-config-test
+(deftest ^:integration fetch-landfire-layers-old-config-test
   (let [config {:db-spec         db-spec
                 :srid            "CUSTOM:900914"
                 :landfire-layers {:aspect             "landfire.asp WHERE rid=1"
@@ -57,7 +57,7 @@
                                   :slope              "landfire.slp WHERE rid=1"}}]
     (is (some? (fetch/landfire-layers config)))))
 
-(deftest fetch-landfire-layers-test
+(deftest ^:integration fetch-landfire-layers-test
   (testing "Fetching layers from postgis and geotiff files"
     (let [postgis-config {:db-spec         db-spec
                           :srid            "CUSTOM:900914"
@@ -120,7 +120,7 @@
       ;; TODO Add test for envelope
       )))
 
-(deftest run-simulation-test
+(deftest ^:integration run-simulation-test
   (testing "Running simulation with different ways to fetch layers"
     (let [postgis-config  (merge test-config-base
                                  {:landfire-layers    {:aspect             {:type   :postgis
